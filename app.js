@@ -98,7 +98,7 @@
   let photoIndex = 0;
   function renderPhoto() {
     const card = cards[photoIndex];
-    $('#lightbox-photo').src = '/assets/' + card.dataset.photo + '.webp';
+    $('#lightbox-photo').src = card.dataset.photoSrc || '/assets/' + card.dataset.photo + '.webp';
     $('#lightbox-photo').alt = $('img', card).alt;
     $('#lightbox-caption').textContent = card.dataset.caption + ' · 0' + (photoIndex + 1) + '/04';
   }
