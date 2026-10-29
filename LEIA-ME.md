@@ -1,76 +1,40 @@
-# Clínica Jönk — arquivos para Vercel
+# Clínica Jönk
 
-Site completo em HTML, CSS e JavaScript. Atualizado em 28/10/2026 com o destaque DigitalX, carrossel de radiologia e galeria curva com 11 cartões de pacientes, incluindo a nova montagem enviada. Inclui as últimas correções do retrato no desktop e dos ícones no celular, as fotografias otimizadas, o vídeo sincronizado com a rolagem, fontes locais, GSAP e ScrollTrigger.
+Site estático em HTML, CSS e JavaScript. A única fonte oficial fica na raiz do repositório. Não requer banco de dados, chaves de API ou dependências npm. Fotografias, vídeo, fontes, GSAP e ScrollTrigger são locais; os avisos de licença das bibliotecas permanecem preservados.
 
-Não requer banco de dados, chaves de API ou dependências de aplicação. O conteúdo publicado fica em `dist/`. A pasta funciona independentemente do Sites.
+## Arquivos do site
 
-## Publicar pela Vercel
+- `index.html`: textos, contatos, estrutura e ícones.
+- `styles.css`: estilos gerais e responsividade.
+- `app.js`: navegação, galeria e animações gerais.
+- `smile-scene.css` e `smile-scene.js`: cena de vídeo sincronizada com a rolagem.
+- `care-showcase.css` e `care-showcase.js`: radiologia, galeria de pacientes e ampliação.
+- `assets/`: fotografias, vídeo, fontes e bibliotecas locais.
+- `foto da clinina jok atualiza para ser aplicada.webp`: foto atualizada da seção de contato; a galeria conserva sua própria imagem.
 
-1. Extraia o ZIP.
-2. Coloque o conteúdo da pasta `clinica-jonk-vercel-2026-10-28-v2` em um repositório GitHub, GitLab ou Bitbucket.
-3. Na Vercel, crie um projeto e importe esse repositório.
-4. Use como Root Directory a pasta que contém `vercel.json`.
-5. Publique. As configurações já estão no arquivo `vercel.json`:
+## Desenvolvimento e verificação
 
-| Configuração | Valor |
-| --- | --- |
-| Framework Preset | Other |
-| Build Command | `node prepare-vercel.mjs` |
-| Output Directory | `dist` |
-| Install Command | Vazio |
-
-Não é necessário enviar a pasta `.openai` nem conectar o plugin Sites. O ZIP não inclui credenciais ou histórico Git.
-
-Alternativa pelo terminal, dentro da pasta extraída e com Node.js instalado:
-
-```sh
-npx vercel --prod
-```
-
-Esse comando solicita login na sua conta e publica o projeto. A publicação deve ser executada por você; este pacote não foi implantado na sua conta da Vercel.
-
-## Endereço e domínio próprio
-
-Durante o build, `prepare-vercel.mjs` atualiza os metadados de compartilhamento, a URL canônica e os dados estruturados usando o endereço fornecido pela Vercel. A prioridade é `SITE_URL`, depois `VERCEL_PROJECT_PRODUCTION_URL` e depois `VERCEL_URL`.
-
-Para definir um domínio explicitamente, adicione a variável `SITE_URL` nas configurações do projeto com a URL completa do seu domínio e publique novamente. Conectar o domínio e configurar o DNS são etapas separadas feitas no painel da Vercel. Mantenha habilitado o acesso às System Environment Variables para a detecção automática.
-
-## Editar e visualizar no computador
-
-- `dist/index.html`: textos, contatos, estrutura e ícones SVG.
-- `dist/styles.css`: estilos gerais e responsividade.
-- `dist/app.js`: navegação, galeria e animações gerais.
-- `dist/smile-scene.css`: enquadramento da doutora e estilos da cena de vídeo.
-- `dist/smile-scene.js`: sincronização do vídeo com o scroll.
-- `dist/care-showcase.css` e `dist/care-showcase.js`: radiologia, galeria de pacientes e visualização ampliada.
-- `dist/assets/`: fotografias, vídeo, fontes e bibliotecas locais.
-
-Para visualizar com Node.js, execute na pasta extraída:
-
-```sh
-node serve.mjs
-```
-
-Abra `http://127.0.0.1:4173`. Use esse servidor em vez de abrir o HTML por duplo clique, pois os recursos usam caminhos a partir da raiz do site. Para encerrar, pressione Ctrl+C.
-
-Verificação dos arquivos:
+Com Node.js 24, execute na raiz:
 
 ```sh
 node verify.mjs
+node serve.mjs
 ```
 
-As verificações locais conferem recursos, links internos, contatos e configuração. A publicação e o funcionamento dentro da sua conta Vercel ainda precisam ser confirmados após o deploy. Prévia local revisada nas larguras de 1280, 390 e 320 pixels; carrosséis, teclado, arraste e visualização ampliada conferidos.
+O servidor local usa a porta 4173. Use-o em vez de abrir o HTML por duplo clique, pois os recursos usam caminhos a partir da raiz do domínio. Encerre com Ctrl+C. Edite diretamente os arquivos da raiz em uma branch separada e execute as verificações antes de salvar. Não é necessário gerar ou sincronizar uma segunda pasta.
 
-## Conteúdo e bibliotecas
+## Hostinger
 
-Os arquivos de mídia são as versões otimizadas utilizadas no site. Os anexos originais de referência não são necessários para a hospedagem. Os avisos de licença incluídos nas bibliotecas GSAP e ScrollTrigger foram preservados. Fontes utilizadas: DM Sans e DM Serif Display.
+Consulte `HOSTINGER.md`. A hospedagem copia a raiz para `public_html`, onde `index.html` deve ficar diretamente. O ZIP opcional pode ser gerado com `node prepare-hostinger.mjs`; a geração não publica nada. Publicação e merge dependem de autorização explícita.
 
-Exportado da versão de código `f67a4d6a0bd003d3c6b7d0bd3c18e84a655ea6b4`, com adaptação dos metadados para a nova hospedagem.
+## Alternativa Vercel
 
-Documentação oficial consultada:
+A configuração preservada em `vercel.json` usa framework Other, `node prepare-vercel.mjs` como comando de preparação e `.` como saída. O site já está pronto; esse comando somente adapta metadados ao endereço informado por `SITE_URL`, `VERCEL_PROJECT_PRODUCTION_URL` ou `VERCEL_URL`, nessa ordem.
 
-- https://vercel.com/docs/project-configuration/vercel-json
-- https://vercel.com/docs/environment-variables/system-environment-variables
-- https://vercel.com/docs/cli/deploy
+Se uma dessas variáveis estiver definida, executar o comando altera `index.html` da raiz. Não é necessário executá-lo para a Hostinger nem para visualizar localmente. Teste-o em uma cópia temporária quando estiver apenas validando ferramentas. A configuração da Vercel foi adaptada localmente; uma publicação real nessa plataforma não foi validada nesta limpeza.
 
-Revisão final: cartão “Um olhar individual” removido; “Sorrisos em detalhe” substituído pela montagem Post Gonçalves.png; Radiologia odontológica e Tomografia Computadorizada com o mesmo fundo amarelo. Navegação circular dos 11 cartões, ampliação da montagem e destaque dos serviços conferidos na prévia local.
+Configuração de domínio, DNS e publicação são etapas separadas. Nenhum script de preparação realiza login ou publicação.
+
+## Histórico e reversão
+
+`MATERIAIS-E-TESTES.md` conserva o registro histórico original. `HOSTINGER-ROOT.md` explica a migração para fonte única e a reversão pelos commits Git. Os originais continuam recuperáveis pelo histórico; não foi feita alteração de conteúdo ou aparência nos arquivos públicos.
