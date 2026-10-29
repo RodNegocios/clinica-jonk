@@ -26,7 +26,7 @@ assert.equal(manifest.framework,null);
 console.log('PASS: anchors, unique IDs, local assets, all seven photographs, WhatsApp, metadata and motion fallback.');
 
 for (const file of ['styles.css', 'smile-scene.css', 'care-showcase.css', 'assets/fonts.css']) {
- const text = await fs.readFile(file, 'utf8');
+ const text = (await fs.readFile(file, 'utf8')).replace(/url\((["'])data:[\s\S]*?\1\)/g, '');
  for (const [, resource] of text.matchAll(/url\(['\"]?([^'\")]+)['\"]?\)/g)) {
   if (resource.startsWith('data:') || /^https?:/.test(resource)) continue;
   const target = resource.startsWith('/') ? '.' + decodeURI(resource) : path.join(path.dirname(file), decodeURI(resource));
