@@ -11,7 +11,7 @@ if (!address) {
   }
   const origin = url.origin;
   const image = `${origin}/assets/fachada.webp`;
-  const page = new URL('./dist/index.html', import.meta.url);
+  const page = new URL('./index.html', import.meta.url);
   let html = await fs.readFile(page, 'utf8');
   html = html.replace(/(<meta property="og:url" content=")[^"]*(">)/, `$1${origin}/$2`);
   html = html.replace(/(<meta property="og:image" content=")[^"]*(">)/, `$1${image}$2`);

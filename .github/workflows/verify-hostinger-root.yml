@@ -14,9 +14,10 @@ jobs:
         with:
           node-version: '24'
       - run: node verify.mjs
-      - run: node verify-hostinger-root.mjs
       - name: Check root JavaScript syntax
         run: |
           for file in app.js care-showcase.js smile-scene.js; do
             node --check "$file" || exit
           done
+      - name: Validate publication ZIP
+        run: node prepare-hostinger.mjs "$RUNNER_TEMP/hostinger-packages"

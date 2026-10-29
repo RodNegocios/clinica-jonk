@@ -2,7 +2,8 @@ import http from 'node:http';
 import fs from 'node:fs/promises';
 import { createReadStream } from 'node:fs';
 import path from 'node:path';
-const root = path.resolve('dist');
+import { fileURLToPath } from 'node:url';
+const root = path.dirname(fileURLToPath(import.meta.url));
 const types = { '.html':'text/html; charset=utf-8', '.js':'text/javascript; charset=utf-8', '.css':'text/css; charset=utf-8', '.webp':'image/webp', '.jpg':'image/jpeg', '.mp4':'video/mp4', '.svg':'image/svg+xml', '.woff2':'font/woff2' };
 http.createServer(async(req,res) => {
   try {
