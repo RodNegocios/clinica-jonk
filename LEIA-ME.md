@@ -25,7 +25,7 @@ O servidor local usa a porta 4173. Use-o em vez de abrir o HTML por duplo clique
 
 ## Hostinger
 
-Consulte `HOSTINGER.md`. A hospedagem copia a raiz para `public_html`, onde `index.html` deve ficar diretamente. O ZIP opcional pode ser gerado com `node prepare-hostinger.mjs`; a geração não publica nada. Publicação e merge dependem de autorização explícita.
+Consulte `HOSTINGER.md`. Na integração nativa GitHub → Hostinger, use a branch `main` e copie a raiz para `public_html`, onde `index.html` deve ficar diretamente. Não há build, instalação de dependências ou ZIP nesse fluxo. A ativação da conexão e da implantação automática é feita no painel da hospedagem, separadamente. O ZIP opcional pode ser gerado com `node prepare-hostinger.mjs` para outros fluxos; a geração não publica nada. Publicação e merge dependem de autorização explícita.
 
 ## Alternativa Vercel
 
